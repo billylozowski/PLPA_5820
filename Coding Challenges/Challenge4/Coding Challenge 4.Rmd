@@ -3,17 +3,25 @@ title: "R Markdown in-class"
 author: "Billy Lozowski"
 date: "`r Sys.Date()`"
 output:
-  md_document:
-      variant: gfm
+  word_document:
+    toc: true
   html_document:
     toc: true
     word_document: null
     pdf_document: null
-  word_document:
-    toc: true
   pdf_document:
     toc: true
+  md_document:
+      variant: gfm
 ---
+
+
+### Question 1
+a.	A YAML header specifies certain information about the markdown file like the title, output type (html/pdf etc.), and any other knitted formatting arguments.
+
+b.	Literate programming refers to explaining what code does literally (say annotations). I assume this is so someone can follow exactly what you're trying to achieve within your code.
+
+--------------------------------------------------------------------------------
 
 [&rarr; Noel et al. (2022) article &larr;](https://doi.org/10.1094/PDIS-06-21-1253-RE)
 
@@ -109,4 +117,6 @@ fig2 <- ggarrange(
 )
 fig2
 ```
+
+[GitHub Link](https://github.com/billylozowski/PLPA_5820.git)
 
