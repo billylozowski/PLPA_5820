@@ -1,6 +1,8 @@
 # PLPA_5820
 Principles and Techniques of Reproducible Science
 
+[Coding Challenge 4](Coding Challenges/Challenge4/Coding-Challenge-4.md)
+
 ```
 .
 ├── Assignments
@@ -59,3 +61,4 @@ Principles and Techniques of Reproducible Science
 ├── PLPA_5820.Rproj
 └── README.md
 ```
+
