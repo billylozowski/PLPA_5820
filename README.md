@@ -1,6 +1,7 @@
 # PLPA_5820
 Principles and Techniques of Reproducible Science
 
+```
 .
 ├── Assignments
 │   ├── Baker (2016) review.docx
@@ -57,3 +58,4 @@ Principles and Techniques of Reproducible Science
 ├── Lectures
 ├── PLPA_5820.Rproj
 └── README.md
+```
