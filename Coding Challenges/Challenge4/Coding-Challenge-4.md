@@ -1,3 +1,15 @@
+### Question 1
+
+1.  A YAML header specifies certain information about the markdown file
+    like the title, output type (html/pdf etc.), and any other knitted
+    formatting arguments.
+
+2.  Literate programming refers to explaining what code does literally
+    (say annotations). I assume this is so someone can follow exactly
+    what you’re trying to achieve within your code.
+
+------------------------------------------------------------------------
+
 [→ Noel et al. (2022) article
 ←](https://doi.org/10.1094/PDIS-06-21-1253-RE)
 
@@ -82,3 +94,5 @@ fig2
 ```
 
 ![](Coding-Challenge-4_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+
+[GitHub Link](https://github.com/billylozowski/PLPA_5820.git)
