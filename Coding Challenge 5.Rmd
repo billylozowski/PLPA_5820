@@ -2,7 +2,11 @@
 title: "Data Wrangling"
 author: "Billy Lozowski"
 date: "`r Sys.Date()`"
-output: html_document
+output:
+  pdf_document:
+    toc: true
+  md_document:
+      variant: gfm
 ---
 
 ```{r setup, include=FALSE}
@@ -91,7 +95,6 @@ alpha_average2 %>%
        y = "Difference")
 ```
 
+7.	Commit and push a gfm .md file to GitHub inside a directory called Coding Challenge 5. Provide me a link to your github written as a clickable link in your .pdf or .docx
 
-
-
-
+[GitHub Link](https://github.com/billylozowski/PLPA_5820.git)
