@@ -114,7 +114,7 @@ City
 you need and input as input to your function.
   b. The output of your function should be 1367.854 km
   
-```{r}
+```{r filter Aubrn & NY}
 library(tidyverse)
 auburn.NY <- cities %>%
   filter(city == "New York" | city == "Auburn")
@@ -128,7 +128,7 @@ distance(auburn.NY[1,7], auburn.NY[1,8], auburn.NY[2,7], auburn.NY[2,8])
 6. Now, use your function within a for loop to calculate the distance between all other
 cities in the data. The output of the first 9 iterations is shown below.
 
-```{r}
+```{r distance}
 
 # Create a vector containing all city names
 u.city <- unique(cities$city)
@@ -162,3 +162,5 @@ auburn.US <- rbind(auburn.US, data.frame(city1 = city1,
 print(head(auburn.US, 9))
 ```
 
+
+[Coding Challenge 6](https://github.com/billylozowski/PLPA_5820/tree/main/Coding%20Challenges/Challenge6)
