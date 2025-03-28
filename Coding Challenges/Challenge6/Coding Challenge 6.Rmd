@@ -3,12 +3,12 @@ title: "Iterations and Functions"
 author: "Billy Lozowski"
 date: "`r Sys.Date()`"
 output: 
-  md_document:
-      variant: gfm
-  html_document:
-    toc: true
   pdf_document:
     toc: true
+  html_document:
+    toc: true
+  md_document:
+      variant: gfm
 ---
 
 ```{r setup, include=FALSE}

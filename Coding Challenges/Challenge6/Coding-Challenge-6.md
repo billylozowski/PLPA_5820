@@ -191,3 +191,6 @@ print(head(auburn.US, 9))
     ## 7 Philadelphia Auburn   1239.9732
     ## 8      Atlanta Auburn    162.5121
     ## 9   Washington Auburn   1036.9900
+
+[Coding Challenge
+6](https://github.com/billylozowski/PLPA_5820/tree/main/Coding%20Challenges/Challenge6)
