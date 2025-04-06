@@ -1,0 +1,136 @@
+---
+title: "Linear Models"
+author: "Billy Lozowski"
+date: '`r Sys.Date()`'
+output: 
+  md_document:
+      variant: gfm
+  html_document:
+    toc: true
+  pdf_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+1. Read in the data called “PlantEmergence.csv” using a relative file path and load the
+following libraries. tidyverse, lme4, emmeans, multcomp, and multcompView. Turn the
+Treatment, DaysAfterPlanting and Rep into factors using the function as.factor
+
+```{r packages, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(lme4)
+library(emmeans)
+library(multcomp)
+library(multcompView)
+```
+
+```{r data}
+plant.emergence <- read.csv("data/PlantEmergence.csv")
+
+plant.emergence$Treatment = as.factor(plant.emergence$Treatment)
+plant.emergence$DaysAfterPlanting = as.factor(plant.emergence$DaysAfterPlanting)
+plant.emergence$Rep = as.factor(plant.emergence$Rep)
+
+```
+
+2. Fit a linear model to predict Emergence using Treatment and DaysAfterPlanting along with the interaction. Provide the summary of the linear model and ANOVA results.
+
+Treatment had a strong effect on Emergence (F = 307.95, p < .001). On average, emergence occurred after 182.3 days (I'm unsure if these are the appropriate units?!), however, after Treatment2, this was 136.5 days earlier.
+
+```{r interaction model}
+lm_model <- lm(Emergence ~ Treatment + DaysAfterPlanting + Treatment:DaysAfterPlanting,
+               data = plant.emergence)
+summary(lm_model)
+anova(lm_model)
+```
+
+3. Based on the results of the linear model in question 2, do you need to fit the
+interaction term? Provide a simplified linear model without the interaction term but still
+testing both main effects. Provide the summary and ANOVA results. Then, interpret the
+intercept and the coefficient for Treatment 2.
+
+An interaction term was not necessary, since none exhibited statistical or practical significance within the linear model.
+
+According to the simplified linear model, Treatment still has a strong effect on Emergence (all but Treatments 4, 7, and 9 were p < .05). However, this model also revealed that DaysAfterPlanting also had a strong effect (all ps < .001).
+
+```{r sans interaction model}
+lm_model1 <- lm(Emergence ~ Treatment + DaysAfterPlanting, 
+                data = plant.emergence)
+summary(lm_model1)
+anova(lm_model1)
+```
+4. Calculate the least square means for Treatment using the emmeans package and
+perform a Tukey separation with the compact letter display using the cld function.
+Interpret the results
+
+According to visualisations and pairwise comparisons, the effect for Treatment2 was statistically different from all other treatment types. With a mean Emergence of 55.6 (units), Treatment2 was roughly 135 units sooner than all others (all ps < .001).
+
+
+```{r least squares}
+lsmeans <- emmeans(lm_model1, ~Treatment, data = plant.emergence)
+ggplot(data = plant.emergence, aes(x = Treatment, y = Emergence, fill = Treatment)) +
+  geom_boxplot()
+summary(lsmeans)
+
+results_lsmeans <- cld(lsmeans, alpha = 0.05, details = TRUE)
+summary(results_lsmeans)
+
+```
+
+5. The provided function lets you dynamically add a linear model plus one factor from
+that model and plots a bar chart with letters denoting treatment differences. Use this
+model to generate the plot shown below. Explain the significance of the letters.
+
+```{r lm function}
+plot_cldbars_onefactor <- function(lm_model, factor) {
+  data <- lm_model$model
+  variables <- colnames(lm_model1$model)
+  dependent_var <- variables[1]
+  independent_var <- variables[2:length(variables)]
+  
+  lsmeans <- emmeans(lm_model, as.formula(paste("~", factor))) # estimate
+  lsmeans
+  
+  results_lsmeans <- cld(lsmeans, alpha = 0.05, 
+                         reversed = TRUE, 
+                         details = TRUE, 
+                         Letters = letters) # contrast with Tukey adjustment by default.
+
+# Extracting the letters for the bars
+  sig.diff.letters <- data.frame(results_lsmeans$emmeans[,1],
+                                 str_trim(results_lsmeans$emmeans[,7]))
+  colnames(sig.diff.letters) <- c(factor, "Letters")
+
+# for plotting with letters from significance test
+  ave_stand2 <- lm_model$model %>%
+    group_by(!!sym(factor)) %>%
+    dplyr::summarize(
+      ave.emerge = mean(.data[[dependent_var]], na.rm = TRUE),
+      se = sd(.data[[dependent_var]]) / sqrt(n())
+      ) %>%
+    left_join(sig.diff.letters, by = factor) %>%
+    mutate(letter_position = ave.emerge + 10 * se)
+  
+  plot <- ggplot(data, aes(x = !! sym(factor), y = !! sym(dependent_var))) +
+    stat_summary(fun = mean, geom = "bar") +
+    stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.5) +
+    ylab("Number of emerged plants") +
+    geom_jitter(width = 0.02, alpha = 0.5) +
+    geom_text(data = ave_stand2, aes(label = Letters, y = letter_position),
+              size = 5) +
+    xlab(as.character(factor)) +
+    theme_classic()
+  return(plot)
+}
+
+plot_cldbars_onefactor(lm_model1, "Treatment")
+```
+
+6. Generate the gfm .md file along with a .html, .docx, or .pdf. Commit, and push the
+.md file to github and turn in the .html, .docx, or .pdf to Canvas. Provide me a link here to
+your github.
+
+[Coding Challenge 7](https://github.com/billylozowski/PLPA_5820/tree/main/Coding%20Challenges/Challenge6)
