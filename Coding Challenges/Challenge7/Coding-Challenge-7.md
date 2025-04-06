@@ -267,4 +267,4 @@ plot_cldbars_onefactor(lm_model1, "Treatment")
     .docx, or .pdf to Canvas. Provide me a link here to your github.
 
 [Coding Challenge
-7](https://github.com/billylozowski/PLPA_5820/tree/main/Coding%20Challenges/Challenge6)
+7](Coding%20Challenges/Challenge7/Coding-Challenge-7.md)

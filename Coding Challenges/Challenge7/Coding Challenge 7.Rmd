@@ -3,12 +3,12 @@ title: "Linear Models"
 author: "Billy Lozowski"
 date: '`r Sys.Date()`'
 output: 
-  md_document:
-      variant: gfm
-  html_document:
-    toc: true
   pdf_document:
     toc: true
+  html_document:
+    toc: true
+  md_document:
+      variant: gfm
 ---
 
 ```{r setup, include=FALSE}
@@ -133,4 +133,4 @@ plot_cldbars_onefactor(lm_model1, "Treatment")
 .md file to github and turn in the .html, .docx, or .pdf to Canvas. Provide me a link here to
 your github.
 
-[Coding Challenge 7](https://github.com/billylozowski/PLPA_5820/tree/main/Coding%20Challenges/Challenge6)
+[Coding Challenge 7](Coding Challenges/Challenge7/Coding-Challenge-7.md)
